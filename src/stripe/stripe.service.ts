@@ -56,11 +56,11 @@ export class StripeService {
     return this.stripe.paymentIntents.create({
       amount,
       currency: 'usd',
-      // automatic_payment_methods: {  // ← USE THIS with v20
-      //   enabled: true,
-      //   allow_redirects: 'never', // Keeps only wallets + cards
-      // },
-      payment_method_types: ['card', 'google_pay', 'apple_pay'],
+      automatic_payment_methods: {  // ← USE THIS with v20
+        enabled: true,
+        allow_redirects: 'never', // Keeps only wallets + cards
+      },
+      // payment_method_types: ['card', 'google_pay', 'apple_pay'],
     });
   }
 
