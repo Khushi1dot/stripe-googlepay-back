@@ -27,7 +27,7 @@ async function bootstrap() {
 
   app.enableCors({
   origin: [
-    'http://localhost:3002', // local frontend
+    'http://localhost:3000', // local frontend
     'https://stripe-googlepay-front-zeta.vercel.app', // production frontend (Vercel)
   ],
   credentials: true,

@@ -1,29 +1,3 @@
-// import { Injectable } from '@nestjs/common';
-// import Stripe from 'stripe';
-// import { ConfigService } from '@nestjs/config';
-
-// @Injectable()
-// export class StripeService {
-//   private stripe: Stripe;
-
-//   constructor(private configService: ConfigService) {
-//     this.stripe = new Stripe(
-//       this.configService.get<string>('STRIPE_SECRET_KEY')!,
-//     );
-//   }
-
-//   async createPaymentIntent(amount: number) {
-//     return this.stripe.paymentIntents.create({
-//       amount,
-//       currency: 'usd',
-//     //   payment_method_types: ['card'],
-//       automatic_payment_methods: {
-//         enabled: true, // Required for Google Pay
-//       },
-//     });
-//   }
-// }
-
 import { Injectable } from '@nestjs/common';
 import Stripe from 'stripe';
 import { ConfigService } from '@nestjs/config';
@@ -32,16 +6,11 @@ import { ConfigService } from '@nestjs/config';
 export class StripeService {
   private stripe: Stripe;
 
-  // constructor() {
-  //   this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  //     apiVersion: '2023-10-16',
-  //   });
-  // }
   constructor(private configService: ConfigService) {
     this.stripe = new Stripe(
       this.configService.get<string>('STRIPE_SECRET_KEY')!,
       {
-    apiVersion: "2025-12-15.clover",
+    // apiVersion: "2025-12-15.clover",
   },
     );
   }
@@ -50,10 +19,10 @@ export class StripeService {
     return this.stripe.paymentIntents.create({
       amount,
       currency: 'usd',
-      //  payment_method_types: ['card'],
-      automatic_payment_methods: {
-        enabled: true,
-      },
+      payment_method_types: ['card', 'google_pay', 'apple_pay']
+      // automatic_payment_methods: {
+      //   enabled: true,
+      // },
       
     });
   }
